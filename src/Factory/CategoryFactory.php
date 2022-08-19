@@ -39,8 +39,10 @@ final class CategoryFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'name' => self::faker()->word(),
-            'slug' => self::faker()->word(),
+            'name' => $name = self::faker()->unique()->word(),
+            'slug' => strtolower(
+                str_replace(' ', '-', $name)
+            ),
         ];
     }
 

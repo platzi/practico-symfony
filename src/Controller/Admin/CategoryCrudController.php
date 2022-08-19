@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 
 class CategoryCrudController extends AbstractCrudController
 {
@@ -31,7 +32,7 @@ class CategoryCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             TextField::new('name', 'Nombre'),
-            TextField::new('slug'),
+            SlugField::new('slug')->setTargetFieldName('name'),
         ];
     }
 }

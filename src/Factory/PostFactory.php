@@ -39,8 +39,10 @@ final class PostFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'title' => self::faker()->sentence(),
-            'slug' => self::faker()->sentence(),
+            'title' => $title = self::faker()->sentence(),
+            'slug' => strtolower(
+                str_replace(' ', '-', $title)
+            ),
             'content' => self::faker()->text(),
         ];
     }

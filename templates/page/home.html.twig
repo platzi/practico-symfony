@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PageController!{% endblock %}
+
+{% block body %}
+    {% for post in posts %}
+    <h2>
+        <a href="{{ path('app_post', { slug: post.slug }) }}">
+            {{ post.title }}
+        </a>
+    </h2>
+    <p>
+        <strong>{{ post.category.name }}</strong>
+        -
+        {{ post.comments|length }} Comentarios
+    </p>
+    <hr>
+    {% endfor %}
+{% endblock %}

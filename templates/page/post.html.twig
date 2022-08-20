@@ -14,10 +14,13 @@
     </p>
 
     <div>
-    {% for comment in post.comments %}
-        <p>{{ comment.content }}</p>
-
+        {% include('page/_comment-form.html.twig') %}
         <hr>
-    {% endfor %}
+
+        {% for comment in post.comments %}
+            <p>{{ comment.content }}</p>
+
+            <hr>
+        {% endfor %}
     </div>
 {% endblock %}

@@ -1,0 +1,8 @@
+{% if app.user %}
+    <p>
+        Comentar como <strong>{{ app.user.name }}</strong>
+    </p>
+    {{ form(form) }}
+{% else %}
+    <a href="{{ path('app_login') }}">Login</a>
+{% endif %}

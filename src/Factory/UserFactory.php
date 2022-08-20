@@ -8,6 +8,8 @@ use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 /**
  * @extends ModelFactory<User>
  *
@@ -28,9 +30,13 @@ use Zenstruck\Foundry\Proxy;
  */
 final class UserFactory extends ModelFactory
 {
-    public function __construct()
+    private $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
     {
         parent::__construct();
+
+        $this->hasher = $hasher;
 
         // TODO inject services if required (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services)
     }
@@ -48,9 +54,12 @@ final class UserFactory extends ModelFactory
 
     protected function initialize(): self
     {
-        // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
         return $this
-            // ->afterInstantiate(function(User $user): void {})
+            ->afterInstantiate(function(User $user): void {
+                $user->setPassword(
+                    $this->hasher->hashPassword($user, $user->getPassword())
+                );
+            })
         ;
     }
 

@@ -5,15 +5,13 @@
 {% block body %}
     {% for post in posts %}
     <h2>
-        <a href="{{ path('app_post', { slug: post.slug }) }}">
+        <a href="{{ path('app_post', { slug: post.slug }) }}" class="text-dark text-decoration-none">
             {{ post.title }}
         </a>
     </h2>
-    <p>
-        <strong>{{ post.category.name }}</strong>
-        -
-        {{ post.comments|length }} Comentarios
-    </p>
+    
+    {% include('page/_info.html.twig') %}
+
     <hr>
     {% endfor %}
 {% endblock %}
